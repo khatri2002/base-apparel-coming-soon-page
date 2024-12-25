@@ -1,0 +1,118 @@
+// breakpoints
+$lg: 1024px;
+$sm: 640px;
+
+.main {
+  @apply flex min-h-screen flex-col lg:flex-row;
+
+  .content {
+    @apply bg-background relative bg-center bg-no-repeat pb-16 pt-10 sm:pt-16 lg:pb-0;
+    min-width: 830px;
+    padding-inline: 14vw;
+    @media (width < $lg) {
+      min-width: auto;
+    }
+    @media (width < $sm) {
+      padding-inline: 0;
+    }
+
+    &:before {
+      content: "";
+      background-image: url("../../assets/images/bg-pattern-desktop.svg");
+      width: 830px;
+      height: 800px;
+      @apply absolute bottom-0 left-0 right-0 top-0 m-auto hidden lg:block;
+    }
+
+    .logo {
+      @apply relative mx-8 w-28 sm:mx-0 sm:w-auto;
+    }
+
+    .heroMobileImage {
+      @apply mt-8 block w-full sm:mt-10 lg:hidden;
+    }
+
+    .title {
+      @apply relative mt-16 text-center text-5xl uppercase sm:mt-24 sm:text-7xl lg:mt-32 lg:text-start;
+      letter-spacing: 1rem;
+
+      .active {
+        @apply font-extralight text-desaturated-red;
+      }
+    }
+
+    .desc {
+      @apply relative mx-8 mt-4 text-center text-base text-desaturated-red sm:mx-0 sm:text-lg lg:text-start lg:text-base;
+    }
+
+    .form {
+      @apply mx-8 mt-12 sm:mx-0;
+
+      .inputContainer {
+        @apply relative flex rounded-full border border-desaturated-red transition duration-300;
+
+        .input {
+          @apply flex h-12 flex-grow items-center pl-5 sm:h-14 sm:pl-8;
+
+          input {
+            @apply flex-grow bg-transparent outline-none;
+          }
+
+          ::placeholder {
+            @apply text-desaturated-red/50;
+          }
+
+          img {
+            @apply invisible mx-3 w-5 opacity-0 transition duration-300 sm:mx-4 sm:w-auto;
+          }
+        }
+
+        .btn {
+          @apply bg-gradient-btn relative rounded-full shadow-xl transition;
+          width: 6.5rem;
+          @media (width < $sm) {
+            width: 5rem;
+          }
+
+          &:before {
+            content: "";
+            height: 110%;
+            width: 105%;
+            @apply bg-gradient-btn-hover invisible absolute bottom-0 left-1/2 right-0 top-0 m-auto -translate-x-1/2 rounded-full opacity-0 transition duration-300;
+          }
+
+          img {
+            @apply relative m-auto;
+          }
+
+          &:hover {
+            @apply shadow-2xl;
+
+            &:before {
+              @apply visible opacity-100;
+            }
+          }
+        }
+      }
+
+      .errorText {
+        @apply invisible ml-5 mt-1 block text-xs text-soft-red opacity-0 transition duration-300 sm:ml-8 sm:mt-2 sm:text-sm;
+      }
+
+      &.error {
+        .inputContainer {
+          @apply border-2 border-soft-red;
+        }
+
+        .inputContainer .input img,
+        .errorText {
+          @apply visible opacity-100;
+        }
+      }
+    }
+  }
+
+  .heroDesktopImage {
+    @apply hidden lg:block;
+  }
+}
